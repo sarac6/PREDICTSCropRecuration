@@ -1,15 +1,18 @@
 ---
 title: "01_Crop system screening and re-curation"
 author: "Sara Contu"
-date: "09/03/2022"
+date: "09/03/2023"
 output: html_document
 ---
+This screening and re-curation was performed in May-June 2022 by Sara Contu.
+
 
 ### Why the need for this screening?
 
-By using the PREDICTS curated crop data it came to light that there were two issues that needed attention and re-curation:
+By using the PREDICTS curated crop data it came to light that there were some issues that needed attention and re-curation:
 
-#### **1. Dubious mixed crop systems**
+
+### **1. Dubious mixed crop systems**
 
 Studies were multiple crops are listed in the crop field are not really mixed crop system.
 
@@ -17,42 +20,19 @@ In using the curated crop data, it has become clear that there are at least some
 
 The source publications for these studies will then be checked to see whether there is positive evidence that the sites each contain multiple crops and, if so, whether the crops can be identified with an acceptable level of confidence (which I would define as better than 50% chance, i.e., can we say what was probably being grown?). Thus, one possible outcome from the re-curation will be the removal of too-precise information about crop identity.
 
-#### **2. Inconsistency between the PREDICTS LHU1 and the crop classification**
+### **2. Inconsistency between the PREDICTS LHU1 and the crop classification**
 
 (i.e., there are crops where there shouldn't be)
 
 The code utilized by Andy to analyses PREDICTS land use classification and the curated crop data was showing inconsistency between LHU1 and the crop classification (i.e., there are crops where there shouldn't be). Initially he has been ignoring this and the information in the crop field and working just with the predicts classification. But by looking at a study, affecting a large number of sites (31), where LUH1 says Pasture and the crop-curation code says Forage, and actually the PREDICTS classification for these sites was wrong in both studies - the fields are used to grow fodder, rather than being grazed.
 
-#### **3. Predicts site blocks that lack Magpie classes**
+### **3. Predicts site blocks that lack Magpie classes**
 
 Not sure this is a third point or can be merged with one of the above. I will decide when i write it down.
 
 ### Recuration of 1. Dubious mixed crop systems
 
-What should go in the Crop field during recuration?
-
-1. If the crop or crops can be identified, then the crop name(s) should be entered.
-
-2. If the crop or crops cannot be identified specifically, but can be fitted into one of the fine-grained MAgPIE classes being used in the NatuRisk project, name the MAgPIE class, as follows (taking care to copy the category name exactly):
-
-* M_OtherCereals: If it is one or more cereal crops other than rice or maize
-* M_OtherOilSeed: If it is one or more oil seed crops other than coconut, oil palm, sunflower, groundnuts (peanuts), soy or cottonseed. Other nuts are only in this category if the paper explicitly says they are being grown for oil
-* M_Pulses: If it is one or more unspecified legumes
-* M_Veg: If it is one or more unspecified vegetables or soft fruit grown as annuals (e.g., grown like tomatoes), including annual root crops grown outside of the tropics
-* M_Nuts: If it is one or more unspecified nuts, unless the paper explicitly says they are being grown for oil (in which case they go in M_OtherOilSeed)
-*M_Fruit: One or more unspecified fruit grown as perennials; any unnamed fruittree, shrub or vine would fall into this class.
-* M_Roots: Unspecified root crops grown in the tropics.
-
-3. If the crop or crops cannot be identified to a fine-grained MAgPIE class, it may still be possible to place it into one of the coarse-grained MAgPIE classes being used in the NatuRisk project, as follows (taking care to copy the category name exactly):
-* M_FORAGE: Unspecified fodder crops; hay
-* M_CEREALS: Any and all cereal crops
-* M_OILCROPS: Any and all oil-seed crops
-* M_SUGAR: Sugar cane or sugar beet (though it should be possible to distinguish between these)
-* M_BIOENERGY: Second-generation biomass/biofuel crops, which might be grasses such as Miscanthus or trees like eucalypts.
-* M_OTHERANNUAL: Vegetables
-* M_OTHERPERENNIAL: Fruit and nuts not covered in M_OILCROPS
-Lastly, if the crop or crops cannot be identified but it is clear whether the site had a single crop or multiple crops, then after any MAgPIE classes, add “single” or “multiple”
-Labelling the crops in this way will allow the models to pick out exactly the right data and not draw any unsupported inferences.
+There are 41 studies that have dubious multiple crops and that need looking at.
 
 ```{r}
   # From Andy's code available on the "Screen for dubious crop data.Rmd" file 
@@ -104,13 +84,37 @@ Labelling the crops in this way will allow the models to pick out exactly the ri
 
 ```
 
-There are 41 studies that have dubious multiple crops and that need looking at.
 
 **Re-curation steps:**
 
 1. look at the article to assess whether the study is looking at a mixed crop system or whether there are just multiple crops being grown at landscape level.
 
 2. check whether data from author provide any information at site level
+
+What should go in the Crop field during recuration?
+
+1. If the crop or crops can be identified, then the crop name(s) should be entered.
+
+2. If the crop or crops cannot be identified specifically, but can be fitted into one of the fine-grained MAgPIE classes being used in the NatuRisk project, name the MAgPIE class, as follows (taking care to copy the category name exactly):
+
+* M_OtherCereals: If it is one or more cereal crops other than rice or maize
+* M_OtherOilSeed: If it is one or more oil seed crops other than coconut, oil palm, sunflower, groundnuts (peanuts), soy or cottonseed. Other nuts are only in this category if the paper explicitly says they are being grown for oil
+* M_Pulses: If it is one or more unspecified legumes
+* M_Veg: If it is one or more unspecified vegetables or soft fruit grown as annuals (e.g., grown like tomatoes), including annual root crops grown outside of the tropics
+* M_Nuts: If it is one or more unspecified nuts, unless the paper explicitly says they are being grown for oil (in which case they go in M_OtherOilSeed)
+*M_Fruit: One or more unspecified fruit grown as perennials; any unnamed fruittree, shrub or vine would fall into this class.
+* M_Roots: Unspecified root crops grown in the tropics.
+
+3. If the crop or crops cannot be identified to a fine-grained MAgPIE class, it may still be possible to place it into one of the coarse-grained MAgPIE classes being used in the NatuRisk project, as follows (taking care to copy the category name exactly):
+* M_FORAGE: Unspecified fodder crops; hay
+* M_CEREALS: Any and all cereal crops
+* M_OILCROPS: Any and all oil-seed crops
+* M_SUGAR: Sugar cane or sugar beet (though it should be possible to distinguish between these)
+* M_BIOENERGY: Second-generation biomass/biofuel crops, which might be grasses such as Miscanthus or trees like eucalypts.
+* M_OTHERANNUAL: Vegetables
+* M_OTHERPERENNIAL: Fruit and nuts not covered in M_OILCROPS
+Lastly, if the crop or crops cannot be identified but it is clear whether the site had a single crop or multiple crops, then after any MAgPIE classes, add “single” or “multiple”
+Labelling the crops in this way will allow the models to pick out exactly the right data and not draw any unsupported inferences.
 
 #### Outcome 1: It is **not a mixed crop system**
 
@@ -119,7 +123,7 @@ There are 41 studies that have dubious multiple crops and that need looking at.
 -   Remove the crop/s species names from the "Crop" field in the PREDICTS Excel form.
 -   Make sure it is not down as Mixed crop in the FF1 and FF2 fields
 -   Add comment on the actions taken in the Pdf and Excel files
--   Re-upload the files into the database
+-   Re-upload the curated files into the database
 
 #### Outcome 2: It is a **mixed crop system**
 
@@ -131,7 +135,7 @@ There are 41 studies that have dubious multiple crops and that need looking at.
     2)  Mixed livestock
     3)  Mixed crops-livestock
 -   Add comment on the actions taken in the Pdf and Excel files
--   Re-upload the files into the database
+-   Re-upload the curated files into the database
 
 ### Summary
 
@@ -153,7 +157,7 @@ For details on each study see file "StudiesWithDubiousMultipleCrops_SC"
 
 ### Lessons learnt:
 
--   From this experience it clearly comes out that it is easy to mis-interpret the site level to the landscape level information. It is common to have the FF1 and FF2 agricultural classification with "mixed farming" when the mix farming is not at the site but at landscape level (i.e. TN1_2009\_\_Peters, is down as Mixed Farming as the text mentions "agricultural land (supporting mainly subsistence agriculture growing maize, sugar caneand tea)", but this is true at landscape level and it does not mean that those sites support mixed systems.
+-   From this experience it clearly comes out that it is easy to mis-interpret the site level to the landscape level information. It is common to have the FF1 and FF2 agricultural classification with "mixed farming" when the mix farming is not at the site but at landscape level (i.e. TN1_2009\_\_Peters, is down as Mixed Farming as the text mentions "agricultural land (supporting mainly subsistence agriculture growing maize, sugar cane and tea)", but this is true at landscape level and it does not mean that those sites support mixed systems.
 
 -   if we need more accurate level of crop information, I could put together a document with examples of common crops and how to classify them. It took me a bit to decide which combination of FF1,2,3 fields was the correct one for Cocoa and Coffee - Arable, Permanent, Fruit.
 
@@ -170,9 +174,9 @@ I always thought the difference would have been between space and time, but foll
 
 ### Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop classification
 
-(a) look at the other inconsistencies below and, if they need it, re-curate the Excel files such that the sites are recorded as Cropland or Plantation Forest rather than whatever they are at the moment; and
+ - I have looked at all the inconsistencies and re-curated the Excel files.
+ - Re-uploaded the curated files into the database so that data will be right for future users.
 
-(b) do the same for the two studies I've fixed in code (on the grounds that then they'll be right for future users - but this is obviously much less urgent)? Thanks! The next message here will be the list of sites for each inconsistency; and the following one will be the sites where the Excel file needs changing to Cropland from Pasture. Let me know if anything's not clear.
 
 ```{r, echo=FALSE}
 
@@ -268,3 +272,18 @@ I always thought the difference would have been between space and time, but foll
 #  [29] "MG1_2006__Baur 4 B 2" "MG1_2006__Baur 4 C 3" "MG1_2006__Baur 4 D 4" 
 
 ```
+
+### Recuration of 3. Predicts site blocks that lack Magpie classes
+
+There are over 510 blocks of sites in the PREDICTS database that don't have enough information to put them into a Magpie top-level class.
+File: Blocks_to_check_for_crops.csv https://naturalhistorymuseum.sharepoint.com/sites/PurvisLab-PREDICTSforbusiness/Shared Documents/PREDICTS for business/Blocks_to_check_for_crops.csv
+
+
+Each block that need to be checked will hava a row per Predominant Habitat call (so if a block has Cropland and Plantation forest, it will have two rows). 
+
+Actions: 
+ 
+ - priority to be given to the blocks that have a baseline site
+ - fill in any crop names , the Magpie1 class the crop belongs to and the Magpie2 classes
+ - used the MagpieHierchy.csv as reference to assign Magpie classes.
+to check and priority will be given to the ones that have a baseline site
