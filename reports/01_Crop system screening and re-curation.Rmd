@@ -2,7 +2,10 @@
 title: "01_Crop system screening and re-curation"
 author: "Sara Contu"
 date: "09/03/2023"
-output: html_document
+output:
+  html_document:
+    code_folding: hide
+  
 ---
 This screening and re-curation was performed in May-June 2022 by Sara Contu.
 
@@ -14,27 +17,32 @@ By using the PREDICTS curated crop data it came to light that there were some is
 
 ### **1. Dubious mixed crop systems**
 
-Studies were multiple crops are listed in the crop field are not really mixed crop system.
+Studies were multiple crops listed in the crop field are not really representing mixed crop system.
+
+
+### **2. Inconsistency between the PREDICTS LHU1 and the crop classification**
+
+Sites that had a Predominant habitat not associated to crops (i.e., Pasture), had crop information in the crop field. 
+
+
+### **3. Predicts site blocks that lack Magpie classes**
+
+The are a number of blocks of site (~500) within xx number of studies for which the Predominant habitat is either: Cropland or Plantation Forest but the crop name and Magpie class are missing. 
+This screening addressed this issue by adding any crop name and Magpie class to the file Andy was working on, as well as re-curating the original Excel files and re-upload them onto the database. 
+
+
+
+### Recuration of 1. Dubious mixed crop systems
+
 
 In using the curated crop data, it has become clear that there are at least some PREDICTS studies where multiple crops are listed for cropland sites, not because the site is in a field where multiple crops are grown, but because the agricultural landscape as a whole contains more than a single crop. This weakens attempts to estimate crop-specific coefficients, and particularly to test whether within-field crop diversity mitigates effects on biodiversity.
 
 The source publications for these studies will then be checked to see whether there is positive evidence that the sites each contain multiple crops and, if so, whether the crops can be identified with an acceptable level of confidence (which I would define as better than 50% chance, i.e., can we say what was probably being grown?). Thus, one possible outcome from the re-curation will be the removal of too-precise information about crop identity.
 
-### **2. Inconsistency between the PREDICTS LHU1 and the crop classification**
-
-(i.e., there are crops where there shouldn't be)
-
-The code utilized by Andy to analyses PREDICTS land use classification and the curated crop data was showing inconsistency between LHU1 and the crop classification (i.e., there are crops where there shouldn't be). Initially he has been ignoring this and the information in the crop field and working just with the predicts classification. But by looking at a study, affecting a large number of sites (31), where LUH1 says Pasture and the crop-curation code says Forage, and actually the PREDICTS classification for these sites was wrong in both studies - the fields are used to grow fodder, rather than being grazed.
-
-### **3. Predicts site blocks that lack Magpie classes**
-
-Not sure this is a third point or can be merged with one of the above. I will decide when i write it down.
-
-### Recuration of 1. Dubious mixed crop systems
-
 There are 41 studies that have dubious multiple crops and that need looking at.
 
 ```{r}
+
   # From Andy's code available on the "Screen for dubious crop data.Rmd" file 
   # comes out that there are 41 studies that need looking at 
   # magpie <- readRDS("data/PREDICTSsites_classified_LUH2_vivid.rds")
@@ -155,13 +163,13 @@ For details on each study see file "StudiesWithDubiousMultipleCrops_SC"
 ```
 
 
-### Lessons learnt:
+#### Lessons learnt:
 
 -   From this experience it clearly comes out that it is easy to mis-interpret the site level to the landscape level information. It is common to have the FF1 and FF2 agricultural classification with "mixed farming" when the mix farming is not at the site but at landscape level (i.e. TN1_2009\_\_Peters, is down as Mixed Farming as the text mentions "agricultural land (supporting mainly subsistence agriculture growing maize, sugar cane and tea)", but this is true at landscape level and it does not mean that those sites support mixed systems.
 
 -   if we need more accurate level of crop information, I could put together a document with examples of common crops and how to classify them. It took me a bit to decide which combination of FF1,2,3 fields was the correct one for Cocoa and Coffee - Arable, Permanent, Fruit.
 
-### Questions
+#### Questions
 
 -   What is the difference between FF1 Mixed crop and an FF1 Arable field crop with "various field crop combined? These two combinations appear to be the same thing really, as per FAO definitions; are they the same thing for PREDICTS? if not we need to specify how or when coding you should account for the two things to be possibly just the same.
 
@@ -174,11 +182,15 @@ I always thought the difference would have been between space and time, but foll
 
 ### Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop classification
 
+The code utilized by Andy to analyses PREDICTS land use classification and the curated crop data was showing inconsistency between LHU1 and the crop classification (i.e., there are crops where there shouldn't be). The information in the crop fields in cases like this, have been initially ignored and the work included just the predicts habitat classification. But by looking at a study, affecting a large number of sites (31), where LUH1 says Pasture and the crop-curation code says Forage, and actually the PREDICTS classification for these sites was wrong in both studies - the fields are used to grow fodder, rather than being grazed.
+
+I have looked at all the studies that were showing such inconsistency and these are the steps I have taken:
+
  - I have looked at all the inconsistencies and re-curated the Excel files.
  - Re-uploaded the curated files into the database so that data will be right for future users.
 
 
-```{r, echo=FALSE}
+```{r}
 
 # > qq<-which(merged$LUH1=="Pasture" & merged$Mag1 == "Forage") 
 #  > merged$SSBS[qq] 
@@ -276,14 +288,22 @@ I always thought the difference would have been between space and time, but foll
 ### Recuration of 3. Predicts site blocks that lack Magpie classes
 
 There are over 510 blocks of sites in the PREDICTS database that don't have enough information to put them into a Magpie top-level class.
-File: Blocks_to_check_for_crops.csv https://naturalhistorymuseum.sharepoint.com/sites/PurvisLab-PREDICTSforbusiness/Shared Documents/PREDICTS for business/Blocks_to_check_for_crops.csv
+
+File: "Blocks_to_check_for_crops.csv" [PurvisLab-PREDICTSforbusiness/Shared/Document/PREDICTS for business/Blocks_to_check_for_crops.csv] 
 
 
-Each block that need to be checked will hava a row per Predominant Habitat call (so if a block has Cropland and Plantation forest, it will have two rows). 
+Each block that need to be checked will have a row per Predominant Habitat (so if a block has Cropland and Plantation forest, it will have two rows). 
 
 Actions: 
  
  - priority to be given to the blocks that have a baseline site
- - fill in any crop names , the Magpie1 class the crop belongs to and the Magpie2 classes
+ - check papers and data from author to fetch available information
+ - fill in any crop names, the Magpie1 class the crop belongs to and the Magpie2 classes
  - used the MagpieHierchy.csv as reference to assign Magpie classes.
-to check and priority will be given to the ones that have a baseline site
+
+
+
+
+
+
+
