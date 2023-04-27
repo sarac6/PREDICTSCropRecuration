@@ -7,9 +7,15 @@ output:
     code_folding: hide
   
 ---
+
+
+
 This screening and re-curation was performed in May-June 2022 by Sara Contu.
 
-
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 ### Why the need for this screening?
 
 By using the PREDICTS curated crop data it came to light that there were some issues that needed attention and re-curation:
@@ -29,10 +35,11 @@ Sites that had a Predominant habitat not associated to crops (i.e., Pasture), ha
 
 The are a number of blocks of site (~500) within xx number of studies for which the Predominant habitat is either: Cropland or Plantation Forest but the crop name and Magpie class are missing. 
 This screening addressed this issue by adding any crop name and Magpie class to the file Andy was working on, as well as re-curating the original Excel files and re-upload them onto the database. 
+</div>
 
 
 
-### Recuration of 1. Dubious mixed crop systems
+### **Recuration of 1. Dubious mixed crop systems**
 
 
 In using the curated crop data, it has become clear that there are at least some PREDICTS studies where multiple crops are listed for cropland sites, not because the site is in a field where multiple crops are grown, but because the agricultural landscape as a whole contains more than a single crop. This weakens attempts to estimate crop-specific coefficients, and particularly to test whether within-field crop diversity mitigates effects on biodiversity.
@@ -180,7 +187,7 @@ For details on each study see file "StudiesWithDubiousMultipleCrops_SC"
 
 I always thought the difference would have been between space and time, but following on the FAO definition they are the same thing.
 
-### Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop classification
+### **Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop classification**
 
 The code utilized by Andy to analyses PREDICTS land use classification and the curated crop data was showing inconsistency between LHU1 and the crop classification (i.e., there are crops where there shouldn't be). The information in the crop fields in cases like this, have been initially ignored and the work included just the predicts habitat classification. But by looking at a study, affecting a large number of sites (31), where LUH1 says Pasture and the crop-curation code says Forage, and actually the PREDICTS classification for these sites was wrong in both studies - the fields are used to grow fodder, rather than being grazed.
 
@@ -285,11 +292,11 @@ I have looked at all the studies that were showing such inconsistency and these 
 
 ```
 
-### Recuration of 3. Predicts site blocks that lack Magpie classes
+### **Recuration of 3. Predicts site blocks that lack Magpie classes**
 
 There are over 510 blocks of sites in the PREDICTS database that don't have enough information to put them into a Magpie top-level class.
 
-File: "Blocks_to_check_for_crops.csv" [PurvisLab-PREDICTSforbusiness/Shared/Document/PREDICTS for business/Blocks_to_check_for_crops.csv] 
+File: [Blocks_to_check_for_crops.csv](PurvisLab-PREDICTSforbusiness/Shared/Document/PREDICTS for business/Blocks_to_check_for_crops.csv)
 
 
 Each block that need to be checked will have a row per Predominant Habitat (so if a block has Cropland and Plantation forest, it will have two rows). 
@@ -299,7 +306,7 @@ Actions:
  - priority to be given to the blocks that have a baseline site
  - check papers and data from author to fetch available information
  - fill in any crop names, the Magpie1 class the crop belongs to and the Magpie2 classes
- - used the MagpieHierchy.csv as reference to assign Magpie classes.
+ - used the [MagpieHierchy.csv](https://naturalhistorymuseum.sharepoint.com/:x:/r/sites/PurvisLab-SaraContu/_layouts/15/Doc.aspx?sourcedoc=%7B617BA3A2-3562-403D-8F04-23AB8A754E80%7D&file=MagpieHierarchy.csv&action=default&mobileredirect=true) as reference to assign Magpie classes.
 
 
 
