@@ -3,8 +3,8 @@ title: "01_Crop system screening and re-curation"
 author: "Sara Contu"
 date: "09/03/2023"
 output:
-  html_document:
-    code_folding: hide
+  github_document:
+    # code_folding: hide
   
 ---
 
