@@ -1,44 +1,53 @@
 01_Crop system screening and re-curation
 ================
 Sara Contu
-09/03/2023
+2023-05-12
+
+- <a href="#1-dubious-mixed-crop-systems"
+  id="toc-1-dubious-mixed-crop-systems">1 Dubious mixed crop systems</a>
+  - <a href="#11-recuration-of-dubious-mixed-crop-systems"
+    id="toc-11-recuration-of-dubious-mixed-crop-systems">1.1 Recuration of
+    Dubious mixed crop systems</a>
+    - <a href="#111-summary" id="toc-111-summary">1.1.1 Summary</a>
+- <a
+  href="#2-inconsistency-between-the-predicts-lhu1-and-the-crop-classification"
+  id="toc-2-inconsistency-between-the-predicts-lhu1-and-the-crop-classification">2
+  Inconsistency between the PREDICTS LHU1 and the crop classification</a>
+  - <a
+    href="#21-recuration-of-2-inconsistency-between-the-predicts-lhu1-and-the-crop-classification"
+    id="toc-21-recuration-of-2-inconsistency-between-the-predicts-lhu1-and-the-crop-classification">2.1
+    Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop
+    classification</a>
+- <a href="#3-predicts-site-blocks-that-lack-magpie-classes"
+  id="toc-3-predicts-site-blocks-that-lack-magpie-classes">3 Predicts site
+  blocks that lack Magpie classes</a>
+  - <a
+    href="#31-recuration-of-predicts-site-blocks-that-lack-magpie-classes"
+    id="toc-31-recuration-of-predicts-site-blocks-that-lack-magpie-classes">3.1
+    Recuration of Predicts site blocks that lack Magpie classes</a>
 
 This screening and re-curation was performed in May-June 2022 by Sara
 Contu.
 
-<style>
-div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
-</style>
+``` r
+ # <style>
+  #div.blue { background-color:#e6f0ff; border-radius: 5px; padding:     #20px;}
+ #  </style>
+ # <div class = "blue">
+###
+```
 
-<div class="blue">
-
-### Why the need for this screening?
+Why the need for this screening?
 
 By using the PREDICTS curated crop data it came to light that there were
 some issues that needed attention and re-curation:
 
-### **1. Dubious mixed crop systems**
+# 1 Dubious mixed crop systems
 
 Studies were multiple crops listed in the crop field are not really
 representing mixed crop system.
 
-### **2. Inconsistency between the PREDICTS LHU1 and the crop classification**
-
-Sites that had a Predominant habitat not associated to crops (i.e.,
-Pasture), had crop information in the crop field.
-
-### **3. Predicts site blocks that lack Magpie classes**
-
-The are a number of blocks of site (\~500) within xx number of studies
-for which the Predominant habitat is either: Cropland or Plantation
-Forest but the crop name and Magpie class are missing. This screening
-addressed this issue by adding any crop name and Magpie class to the
-file Andy was working on, as well as re-curating the original Excel
-files and re-upload them onto the database.
-
-</div>
-
-### **Recuration of 1. Dubious mixed crop systems**
+## 1.1 Recuration of Dubious mixed crop systems
 
 In using the curated crop data, it has become clear that there are at
 least some PREDICTS studies where multiple crops are listed for cropland
@@ -163,7 +172,7 @@ What should go in the Crop field during recuration?
   will allow the models to pick out exactly the right data and not draw
   any unsupported inferences.
 
-#### Outcome 1: It is **not a mixed crop system**
+Outcome 1: It is not a mixed crop system
 
 *Actions*:
 
@@ -173,7 +182,7 @@ What should go in the Crop field during recuration?
 - Add comment on the actions taken in the Pdf and Excel files
 - Re-upload the curated files into the database
 
-#### Outcome 2: It is a **mixed crop system**
+Outcome 2: It is a mixed crop system
 
 *Actions*:
 
@@ -185,7 +194,7 @@ What should go in the Crop field during recuration?
 - Add comment on the actions taken in the Pdf and Excel files
 - Re-upload the curated files into the database
 
-### Summary
+### 1.1.1 Summary
 
 | Screened studies | Mixed crop system | Other |
 |:-----------------|:------------------|:------|
@@ -204,7 +213,7 @@ For details on each study see file “StudiesWithDubiousMultipleCrops_SC”
   StudiesWithDubiousMultipleCrops_SC <- read.csv("../data/StudiesWithDubiousMultipleCrops_SC.csv") 
 ```
 
-#### Lessons learnt:
+Lessons learnt:
 
 - From this experience it clearly comes out that it is easy to
   mis-interpret the site level to the landscape level information. It is
@@ -220,7 +229,7 @@ For details on each study see file “StudiesWithDubiousMultipleCrops_SC”
   them. It took me a bit to decide which combination of FF1,2,3 fields
   was the correct one for Cocoa and Coffee - Arable, Permanent, Fruit.
 
-#### Questions
+Questions
 
 - What is the difference between FF1 Mixed crop and an FF1 Arable field
   crop with “various field crop combined? These two combinations appear
@@ -236,7 +245,12 @@ For details on each study see file “StudiesWithDubiousMultipleCrops_SC”
 I always thought the difference would have been between space and time,
 but following on the FAO definition they are the same thing.
 
-### **Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop classification**
+# 2 Inconsistency between the PREDICTS LHU1 and the crop classification
+
+Sites that had a Predominant habitat not associated to crops (i.e.,
+Pasture), had crop information in the crop field.
+
+## 2.1 Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop classification
 
 The code utilized by Andy to analyses PREDICTS land use classification
 and the curated crop data was showing inconsistency between LHU1 and the
@@ -350,7 +364,16 @@ and these are the steps I have taken:
 #  [29] "MG1_2006__Baur 4 B 2" "MG1_2006__Baur 4 C 3" "MG1_2006__Baur 4 D 4" 
 ```
 
-### **Recuration of 3. Predicts site blocks that lack Magpie classes**
+# 3 Predicts site blocks that lack Magpie classes
+
+The are a number of blocks of site (\~500) within xx number of studies
+for which the Predominant habitat is either: Cropland or Plantation
+Forest but the crop name and Magpie class are missing. This screening
+addressed this issue by adding any crop name and Magpie class to the
+file Andy was working on, as well as re-curating the original Excel
+files and re-upload them onto the database.
+
+## 3.1 Recuration of Predicts site blocks that lack Magpie classes
 
 There are over 510 blocks of sites in the PREDICTS database that don’t
 have enough information to put them into a Magpie top-level class.
