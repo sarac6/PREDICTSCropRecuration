@@ -1,0 +1,373 @@
+01_Crop system screening and re-curation
+================
+Sara Contu
+09/03/2023
+
+This screening and re-curation was performed in May-June 2022 by Sara
+Contu.
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+<div class="blue">
+
+### Why the need for this screening?
+
+By using the PREDICTS curated crop data it came to light that there were
+some issues that needed attention and re-curation:
+
+### **1. Dubious mixed crop systems**
+
+Studies were multiple crops listed in the crop field are not really
+representing mixed crop system.
+
+### **2. Inconsistency between the PREDICTS LHU1 and the crop classification**
+
+Sites that had a Predominant habitat not associated to crops (i.e.,
+Pasture), had crop information in the crop field.
+
+### **3. Predicts site blocks that lack Magpie classes**
+
+The are a number of blocks of site (\~500) within xx number of studies
+for which the Predominant habitat is either: Cropland or Plantation
+Forest but the crop name and Magpie class are missing. This screening
+addressed this issue by adding any crop name and Magpie class to the
+file Andy was working on, as well as re-curating the original Excel
+files and re-upload them onto the database.
+
+</div>
+
+### **Recuration of 1. Dubious mixed crop systems**
+
+In using the curated crop data, it has become clear that there are at
+least some PREDICTS studies where multiple crops are listed for cropland
+sites, not because the site is in a field where multiple crops are
+grown, but because the agricultural landscape as a whole contains more
+than a single crop. This weakens attempts to estimate crop-specific
+coefficients, and particularly to test whether within-field crop
+diversity mitigates effects on biodiversity.
+
+The source publications for these studies will then be checked to see
+whether there is positive evidence that the sites each contain multiple
+crops and, if so, whether the crops can be identified with an acceptable
+level of confidence (which I would define as better than 50% chance,
+i.e., can we say what was probably being grown?). Thus, one possible
+outcome from the re-curation will be the removal of too-precise
+information about crop identity.
+
+There are 41 studies that have dubious multiple crops and that need
+looking at.
+
+``` r
+  # From Andy's code available on the "Screen for dubious crop data.Rmd" file 
+  # comes out that there are 41 studies that need looking at 
+  # magpie <- readRDS("data/PREDICTSsites_classified_LUH2_vivid.rds")
+
+##                        SS nSites nCroplandSites nPlantationSites nCrops
+## 2        AD1_2001__Liow 3      1              0                1      4
+## 3        AD1_2001__Liow 4      1              0                1      4
+## 4      AD1_2009__Knight 1      5              5                0      2
+## 5     AD1_2010__Redpath 1      1              1                0      4
+## 6  AD1_2013__Cunningham 1      8              8                0      8
+## 7    AR1_2010__Sutrisno 1      1              1                0      8
+## 8      DI1_2011__Dawson 1      3              3                0      6
+## 9      DI1_2013__deLima 1    140              0              140      4
+## 10     DI1_2013__deLima 2    140              0              140      4
+## 11   DI1_2013__Rousseau 1     36             36                0      2
+## 12   DI1_2013__Rousseau 2     36             36                0      2
+## 13   DL1_2005__Ferreira 1      2              2                0      3
+## 14    DL1_2009__Azpiroz 1      1              1                0      2
+## 15     DL1_2010__Luskin 1     16             16                0      6
+## 16   DL1_2012__Dallimer 1      4              0                4      3
+## 17   DL1_2013__Alcayaga 1      4              4                0      3
+## 18  DL1_2013__Rodrigues 1      1              1                0      3
+## 19   GP1_2011__Schumann 1     53             53                0      7
+## 20   GP1_2011__Schumann 2     47             47                0      7
+## 21         HB1_2009__Vu 1      1              1                0      2
+## 22     HP1_2007__Willig 1      5              0                5      3
+## 23     HW1_2011__Cerezo 1    180            180                0      3
+## 24    JD1_2002__Pearman 1      2              0                2      2
+## 25    JD1_2002__Pearman 2      2              0                2      2
+## 26        LC1_2010__Liu 1      1              1                0      2
+## 27         LC1_2014__Ge 1      1              1                0      3
+## 28       LC1_2014__Hang 1      1              1                0      3
+## 29       LC1_2015__Yang 1      1              1                0      2
+## 30      LH2_2015__Leong 1     15              0                0      3
+## 31     MH1_2011__Phalan 1      8              0                8      7
+## 32     MH1_2011__Phalan 2      8              0                8      7
+## 33  MJ1_2013__Ndanganga 1    111            111                0     12
+## 34  MJ1_2013__Ndanganga 2    110            110                0     12
+## 35   SC1_2013__Jalilova 1      1              1                0      3
+## 36      SE1_2007__Parra 1      8              8                0      3
+## 37      SE1_2012__Lopez 1      1              1                0      2
+## 38         SH1_2005__Vu 1      2              2                0      2
+## 39    SH1_2012__Norfolk 1     15              0                0      2
+## 40     TN1_2009__Peters 1      8              8                0      3
+## 41         YP1_2008__Hu 1     18             18                0      2
+## 42        YP1_2012__Liu 1      4              4                0      5
+```
+
+**Re-curation steps:**
+
+1.  look at the article to assess whether the study is looking at a
+    mixed crop system or whether there are just multiple crops being
+    grown at landscape level.
+
+2.  check whether data from author provide any information at site level
+
+What should go in the Crop field during recuration?
+
+1.  If the crop or crops can be identified, then the crop name(s) should
+    be entered.
+
+2.  If the crop or crops cannot be identified specifically, but can be
+    fitted into one of the fine-grained MAgPIE classes being used in the
+    NatuRisk project, name the MAgPIE class, as follows (taking care to
+    copy the category name exactly):
+
+- M_OtherCereals: If it is one or more cereal crops other than rice or
+  maize
+- M_OtherOilSeed: If it is one or more oil seed crops other than
+  coconut, oil palm, sunflower, groundnuts (peanuts), soy or cottonseed.
+  Other nuts are only in this category if the paper explicitly says they
+  are being grown for oil
+- M_Pulses: If it is one or more unspecified legumes
+- M_Veg: If it is one or more unspecified vegetables or soft fruit grown
+  as annuals (e.g., grown like tomatoes), including annual root crops
+  grown outside of the tropics
+- M_Nuts: If it is one or more unspecified nuts, unless the paper
+  explicitly says they are being grown for oil (in which case they go in
+  M_OtherOilSeed) \*M_Fruit: One or more unspecified fruit grown as
+  perennials; any unnamed fruittree, shrub or vine would fall into this
+  class.
+- M_Roots: Unspecified root crops grown in the tropics.
+
+3.  If the crop or crops cannot be identified to a fine-grained MAgPIE
+    class, it may still be possible to place it into one of the
+    coarse-grained MAgPIE classes being used in the NatuRisk project, as
+    follows (taking care to copy the category name exactly):
+
+- M_FORAGE: Unspecified fodder crops; hay
+- M_CEREALS: Any and all cereal crops
+- M_OILCROPS: Any and all oil-seed crops
+- M_SUGAR: Sugar cane or sugar beet (though it should be possible to
+  distinguish between these)
+- M_BIOENERGY: Second-generation biomass/biofuel crops, which might be
+  grasses such as Miscanthus or trees like eucalypts.
+- M_OTHERANNUAL: Vegetables
+- M_OTHERPERENNIAL: Fruit and nuts not covered in M_OILCROPS Lastly, if
+  the crop or crops cannot be identified but it is clear whether the
+  site had a single crop or multiple crops, then after any MAgPIE
+  classes, add “single” or “multiple” Labelling the crops in this way
+  will allow the models to pick out exactly the right data and not draw
+  any unsupported inferences.
+
+#### Outcome 1: It is **not a mixed crop system**
+
+*Actions*:
+
+- Remove the crop/s species names from the “Crop” field in the PREDICTS
+  Excel form.
+- Make sure it is not down as Mixed crop in the FF1 and FF2 fields
+- Add comment on the actions taken in the Pdf and Excel files
+- Re-upload the curated files into the database
+
+#### Outcome 2: It is a **mixed crop system**
+
+*Actions*:
+
+- Update the FF1 field to “Mixed Farming”  
+- Update FF2 fields to reflect which mixed system is:
+  1)  Mixed cropping
+  2)  Mixed livestock
+  3)  Mixed crops-livestock
+- Add comment on the actions taken in the Pdf and Excel files
+- Re-upload the curated files into the database
+
+### Summary
+
+| Screened studies | Mixed crop system | Other |
+|:-----------------|:------------------|:------|
+| 41               | 5                 | 1     |
+
+The one study in the “other” group is HW1_2011\_\_Cerezo. This is a
+mixed crop system as the sampling points are along roads, and they are
+surrounded by different crops fields, creating a system of multiple
+crops for the birds sampled.
+
+For details on each study see file “StudiesWithDubiousMultipleCrops_SC”
+
+``` r
+  # this files contains the information gathered by the re-curation investigation.
+
+  StudiesWithDubiousMultipleCrops_SC <- read.csv("../data/StudiesWithDubiousMultipleCrops_SC.csv") 
+```
+
+#### Lessons learnt:
+
+- From this experience it clearly comes out that it is easy to
+  mis-interpret the site level to the landscape level information. It is
+  common to have the FF1 and FF2 agricultural classification with “mixed
+  farming” when the mix farming is not at the site but at landscape
+  level (i.e. TN1_2009\_\_Peters, is down as Mixed Farming as the text
+  mentions “agricultural land (supporting mainly subsistence agriculture
+  growing maize, sugar cane and tea)”, but this is true at landscape
+  level and it does not mean that those sites support mixed systems.
+
+- if we need more accurate level of crop information, I could put
+  together a document with examples of common crops and how to classify
+  them. It took me a bit to decide which combination of FF1,2,3 fields
+  was the correct one for Cocoa and Coffee - Arable, Permanent, Fruit.
+
+#### Questions
+
+- What is the difference between FF1 Mixed crop and an FF1 Arable field
+  crop with “various field crop combined? These two combinations appear
+  to be the same thing really, as per FAO definitions; are they the same
+  thing for PREDICTS? if not we need to specify how or when coding you
+  should account for the two things to be possibly just the same.
+
+| FF1           | FF2            | FF3                                                                  |
+|:--------------|:---------------|:---------------------------------------------------------------------|
+| Mixed farming | Mixed cropping | Specifics of the system (i.e.,3.1.3 Field crops and permanent crops) |
+| Arable        | Field crop     | Various field crop combined                                          |
+
+I always thought the difference would have been between space and time,
+but following on the FAO definition they are the same thing.
+
+### **Recuration of 2. Inconsistency between the PREDICTS LHU1 and the crop classification**
+
+The code utilized by Andy to analyses PREDICTS land use classification
+and the curated crop data was showing inconsistency between LHU1 and the
+crop classification (i.e., there are crops where there shouldn’t be).
+The information in the crop fields in cases like this, have been
+initially ignored and the work included just the predicts habitat
+classification. But by looking at a study, affecting a large number of
+sites (31), where LUH1 says Pasture and the crop-curation code says
+Forage, and actually the PREDICTS classification for these sites was
+wrong in both studies - the fields are used to grow fodder, rather than
+being grazed.
+
+I have looked at all the studies that were showing such inconsistency
+and these are the steps I have taken:
+
+- I have looked at all the inconsistencies and re-curated the Excel
+  files.
+- Re-uploaded the curated files into the database so that data will be
+  right for future users.
+
+``` r
+# > qq<-which(merged$LUH1=="Pasture" & merged$Mag1 == "Forage") 
+#  > merged$SSBS[qq] 
+#  [1] "AD1_2012__Lentini 1 9 34" "AD1_2012__Lentini 1 9 35" "AD1_2012__Lentini 1 9 36" "AD1_2012__Lentini 1 10 38" "AD1_2012__Lentini 1 10 39" "AD1_2012__Lentini 1 10 40" "AD1_2012__Lentini 1 11 42" 
+#  [8] "AD1_2012__Lentini 1 11 43" "AD1_2012__Lentini 1 11 44" "AD1_2012__Lentini 1 12 46" "AD1_2012__Lentini 1 12 47" "AD1_2012__Lentini 1 12 48" "AD1_2012__Lentini 1 13 50" "AD1_2012__Lentini 1 13 51" 
+#  [15] "AD1_2012__Lentini 1 13 52" "MG1_2006__Baur 1 A 1" "MG1_2006__Baur 1 B 2" "MG1_2006__Baur 1 C 3" "MG1_2006__Baur 1 D 4" "MG1_2006__Baur 2 A 1" "MG1_2006__Baur 2 B 2" 
+#  [22] "MG1_2006__Baur 2 C 3" "MG1_2006__Baur 2 D 4" "MG1_2006__Baur 3 A 1" "MG1_2006__Baur 3 B 2" "MG1_2006__Baur 3 C 3" "MG1_2006__Baur 3 D 4" "MG1_2006__Baur 4 A 1" 
+#  [29] "MG1_2006__Baur 4 B 2" "MG1_2006__Baur 4 C 3" "MG1_2006__Baur 4 D 4" 
+#  > are.forage <- grep("AD1_2012__Lentini|MG1_2006__Baur", merged$SSBS[qq]) # By inspection of the original sources 
+#  > merged$Mag1[merged$SSBS %in% are.forage] <- "Forage" 
+#  > merged$LUH1[merged$SSBS %in% are.forage] <- "Cropland" 
+#  > print(paste(length(qq), "sites converted from Pasture to Forage/Cropland, based on information in the papers.")) 
+#  [1] "31 sites converted from Pasture to Forage/Cropland, based on information in the papers." 
+#  > 
+#  > print("Primary or Bioenergy?") 
+#  [1] "Primary or Bioenergy?" 
+#  > qq <- which(merged$LUH1=="Primary" & merged$Mag1=="Bioenergy") 
+#  > merged$SSBS[qq] 
+#  [1] "JB3_2019__daSilva 2 19" "JB3_2019__daSilva 2 20" "JB3_2019__daSilva 2 21" "JB3_2019__daSilva 2 22" "JB3_2019__daSilva 2 23" "JB3_2019__daSilva 2 24" "JB3_2019__daSilva 2 25" 
+#  [8] "JB3_2019__daSilva 2 26" "JB3_2019__daSilva 2 27" 
+#  > 
+#  > print("Primary or OilCrops?") 
+#  [1] "Primary or OilCrops?" 
+#  > qq <- which(merged$LUH1=="Primary" & merged$Mag1=="OilCrops") 
+#  > merged$SSBS[qq] 
+#  [1] "SS1_2011__Lange 1 MÃ¼lverstedt 44" 
+#  > 
+#  > print("YSV or Cereals?") 
+#  [1] "YSV or Cereals?" 
+#  > qq <- which(merged$LUH1=="Young secondary vegetation" & merged$Mag1=="Cereals") 
+#  > merged$SSBS[qq] 
+#  [1] "AD1_2010__Goulson 1 1" "AD1_2010__Goulson 1 11" "AD1_2010__Goulson 1 14" "AD1_2010__Goulson 1 4" 
+#  [5] "AD1_2010__Goulson 1 6" "AD1_2011__Hanley 1 Keyneden 1" "AD1_2011__Hanley 1 Scobbiscombe/Oekenbury 11" "AD1_2011__Hanley 1 Moorhill 13" 
+#  [9] "AD1_2011__Hanley 1 Pinkhill 15" "AD1_2011__Hanley 1 Sherford 17" "AD1_2011__Hanley 1 Kingston 19" "AD1_2011__Hanley 1 Holwood/A38 21" 
+#  [13] "AD1_2011__Hanley 1 Holwood/Howtown 23" "AD1_2011__Hanley 1 Quitheock.Wisewandra 25" "AD1_2011__Hanley 1 Sherford 27" "AD1_2011__Hanley 1 Aveton 29" 
+#  [17] "AD1_2011__Hanley 1 Malston 3" "AD1_2011__Hanley 1 Yealmpton 31" "AD1_2011__Hanley 1 Trematon/Blunts 33" "AD1_2011__Hanley 1 Moorhill 5" 
+#  [21] "AD1_2011__Hanley 1 Pinkhill 7" "AD1_2011__Hanley 1 Sherford 9" "AD1_2011b_Hanley 1 1" "AD1_2011b_Hanley 1 2" 
+#  [25] "AD1_2011b_Hanley 1 5" 
+#  > 
+#  > print("YSV or OtherAnnual?") 
+#  [1] "YSV or OtherAnnual?" 
+#  > qq <- which(merged$LUH1=="Young secondary vegetation" & merged$Mag1=="OtherAnnual") 
+#  > merged$SSBS[qq] 
+#  [1] "AD1_2010__Goulson 1 12" "AD1_2010__Goulson 1 13" "AD1_2010__Goulson 1 9" "AD1_2011__Hanley 1 Sherford 10" 
+#  [5] "AD1_2011__Hanley 1 Scobbiscombe/Oekenbury 12" "AD1_2011__Hanley 1 Moorhill 14" "AD1_2011__Hanley 1 Pinkhill 16" "AD1_2011__Hanley 1 Sherford 18" 
+#  [9] "AD1_2011__Hanley 1 Keyneden 2" "AD1_2011__Hanley 1 Kingston 20" "AD1_2011__Hanley 1 Holwood/A38 22" "AD1_2011__Hanley 1 Holwood/Howtown 24" 
+#  [13] "AD1_2011__Hanley 1 Quitheock.Wisewandra 26" "AD1_2011__Hanley 1 Sherford 28" "AD1_2011__Hanley 1 Aveton 30" "AD1_2011__Hanley 1 Yealmpton 32" 
+#  [17] "AD1_2011__Hanley 1 Trematon/Blunts 34" "AD1_2011__Hanley 1 Malston 4" "AD1_2011__Hanley 1 Moorhill 6" "AD1_2011__Hanley 1 Pinkhill 8" 
+#  > 
+#  > print("YSV or OtherPerennial?") 
+#  [1] "YSV or OtherPerennial?" 
+#  > qq <- which(merged$LUH1=="Young secondary vegetation" & merged$Mag1=="OtherPerennial") 
+#  > merged$SSBS[qq] 
+#  [1] "AD1_2011b_Hanley 1 8" 
+#  > 
+#  > print("ISV or OtherPerennial?") 
+#  [1] "ISV or OtherPerennial?" 
+#  > qq <- which(merged$LUH1=="Intermediate secondary vegetation" & merged$Mag1=="OtherPerennial") 
+#  > merged$SSBS[qq] 
+#  [1] "CM2_2017__Rolim 1 2" 
+#  > 
+#  > print("Pasture or Cereals?") 
+#  [1] "Pasture or Cereals?" 
+#  > qq <- which(merged$LUH1=="Pasture" & merged$Mag1=="Cereals") 
+#  > merged$SSBS[qq] 
+#  [1] "VB1_2005__Eggleton 1 5" "VB1_2005__Eggleton 2 5" "VB1_2005__Eggleton 3 5" "VB1_2005__Eggleton 4 29" "VB1_2005__Eggleton 5 5" 
+#  > 
+#  > print("Pasture or OtherAnnual?") 
+#  [1] "Pasture or OtherAnnual?" 
+#  > qq <- which(merged$LUH1=="Pasture" & merged$Mag1=="OtherAnnual") 
+#  > merged$SSBS[qq] 
+#  [1] "SS1_2011__Mulder 1 B724 412" "SS1_2011__Mulder 2 B724 412" "SS1_2011__Mulder 3 B724 412" "SS1_2011__Mulder 4 B724 412" 
+#  > 
+#  > print("Pasture or Timber?") 
+#  [1] "Pasture or Timber?" 
+#  > qq <- which(merged$LUH1=="Pasture" & merged$Mag1=="Timber") 
+#  > merged$SSBS[qq] 
+#  [1] "AD2_2018__GimenezGomez 1 21" "AD2_2018__GimenezGomez 1 22" "AD2_2018__GimenezGomez 1 23" "AD2_2018__GimenezGomez 1 24" "AD2_2018__GimenezGomez 1 25" 
+# 
+# 
+#  
+# 
+# [02/04/2022 12:08] Andy Purvis 
+# 
+# > qq<-which(merged$LUH1=="Pasture" & merged$Mag1 == "Forage") 
+#  > merged$SSBS[qq] 
+#  [1] "AD1_2012__Lentini 1 9 34" "AD1_2012__Lentini 1 9 35" "AD1_2012__Lentini 1 9 36" "AD1_2012__Lentini 1 10 38" "AD1_2012__Lentini 1 10 39" "AD1_2012__Lentini 1 10 40" "AD1_2012__Lentini 1 11 42" 
+#  [8] "AD1_2012__Lentini 1 11 43" "AD1_2012__Lentini 1 11 44" "AD1_2012__Lentini 1 12 46" "AD1_2012__Lentini 1 12 47" "AD1_2012__Lentini 1 12 48" "AD1_2012__Lentini 1 13 50" "AD1_2012__Lentini 1 13 51" 
+#  [15] "AD1_2012__Lentini 1 13 52" "MG1_2006__Baur 1 A 1" "MG1_2006__Baur 1 B 2" "MG1_2006__Baur 1 C 3" "MG1_2006__Baur 1 D 4" "MG1_2006__Baur 2 A 1" "MG1_2006__Baur 2 B 2" 
+#  [22] "MG1_2006__Baur 2 C 3" "MG1_2006__Baur 2 D 4" "MG1_2006__Baur 3 A 1" "MG1_2006__Baur 3 B 2" "MG1_2006__Baur 3 C 3" "MG1_2006__Baur 3 D 4" "MG1_2006__Baur 4 A 1" 
+#  [29] "MG1_2006__Baur 4 B 2" "MG1_2006__Baur 4 C 3" "MG1_2006__Baur 4 D 4" 
+```
+
+### **Recuration of 3. Predicts site blocks that lack Magpie classes**
+
+There are over 510 blocks of sites in the PREDICTS database that don’t
+have enough information to put them into a Magpie top-level class.
+
+File:
+[Blocks_to_check_for_crops.csv](PurvisLab-PREDICTSforbusiness/Shared/Document/PREDICTS%20for%20business/Blocks_to_check_for_crops.csv)
+
+Each block that need to be checked will have a row per Predominant
+Habitat (so if a block has Cropland and Plantation forest, it will have
+two rows).
+
+Actions:
+
+- priority to be given to the blocks that have a baseline site
+- check papers and data from author to fetch available information
+- fill in any crop names, the Magpie1 class the crop belongs to and the
+  Magpie2 classes
+- used the
+  [MagpieHierchy.csv](https://naturalhistorymuseum.sharepoint.com/:x:/r/sites/PurvisLab-SaraContu/_layouts/15/Doc.aspx?sourcedoc=%7B617BA3A2-3562-403D-8F04-23AB8A754E80%7D&file=MagpieHierarchy.csv&action=default&mobileredirect=true)
+  as reference to assign Magpie classes.
