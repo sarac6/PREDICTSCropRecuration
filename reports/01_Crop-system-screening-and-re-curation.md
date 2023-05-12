@@ -26,21 +26,13 @@ Sara Contu
     id="toc-31-recuration-of-predicts-site-blocks-that-lack-magpie-classes">3.1
     Recuration of Predicts site blocks that lack Magpie classes</a>
 
-This screening and re-curation was performed in May-June 2022 by Sara
-Contu.
-
-``` r
- # <style>
-  #div.blue { background-color:#e6f0ff; border-radius: 5px; padding:     #20px;}
- #  </style>
- # <div class = "blue">
-###
-```
-
-Why the need for this screening?
+**Why the need for this screening?**
 
 By using the PREDICTS curated crop data it came to light that there were
 some issues that needed attention and re-curation:
+
+This screening and re-curation was performed in May-June 2022 by Sara
+Contu.
 
 # 1 Dubious mixed crop systems
 
