@@ -5,11 +5,11 @@
 
 
 This repo contains the data and documentation for the recuration of the PREDICTS sites to a finer resolved land use classification, Land Use Harmonization 2 (LUH2; ref).
-The recuration performed and the steps followed are documented in the "Crop system screening and recuration.md" file saved in the Report folder.
+The recuration performed and the steps followed are documented in the ["01.Crop system screening and recuration.md"](reports/01_Crop-system-screening-and-re-curation.md) file saved in the Report folder.
 
 
 
-## Folders in this repo
+### Folders in this repo
 
 File | Description
 ---|----------------------------------------------------------
